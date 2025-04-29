@@ -5,13 +5,13 @@ namespace DirectorySync
 {
   public partial class Form1 : Form, IMainFormView
   {
-    private MainFormPresenter presenter;
+    private MainFormPresenter _presenter;
 
     public Form1()
     {
       InitializeComponent();
-      presenter = new MainFormPresenter(this, new SyncService());
-      presenter.SetView(this);
+      _presenter = new MainFormPresenter(this, new SyncService());
+      _presenter.SetView(this);
     }
 
     public string SourceDirectory
