@@ -8,7 +8,7 @@ namespace DirectorySync
   {
     private IMainFormView view;
     private readonly ISyncService syncService;
-    private CancellationTokenSource _cancelTokenSourse;
+    private CancellationTokenSource _cancelTokenSourсe;
 
     public MainFormPresenter(IMainFormView view, ISyncService syncService)
     {
@@ -56,21 +56,21 @@ namespace DirectorySync
 
       if (view.IsSyncing)
       {
-        _cancelTokenSourse.Cancel();
+        _cancelTokenSourсe.Cancel();
         return;
       }
 
       view.IsSyncing = true;
       view.SyncButtonText = "Отмена";
-      _cancelTokenSourse = new CancellationTokenSource();
+      _cancelTokenSourсe = new CancellationTokenSource();
 
       try
       {
         view.ClearLog();
         var progress = new Progress<string>(message => view.AppendLog(message));
 
-        await syncService.SynchronizeDirectories(view.SourceDirectory, view.DestinationDirectory, _cancelTokenSourse.Token, progress);
-        await syncService.SynchronizeDirectories(view.DestinationDirectory, view.SourceDirectory, _cancelTokenSourse.Token, progress);
+        await syncService.SynchronizeDirectories(view.SourceDirectory, view.DestinationDirectory, _cancelTokenSourсe.Token, progress);
+        await syncService.SynchronizeDirectories(view.DestinationDirectory, view.SourceDirectory, _cancelTokenSourсe.Token, progress);
 
         view.ShowMessage("Синхронизация завершена.", "Успешно!", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
